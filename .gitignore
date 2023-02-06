@@ -18,3 +18,5 @@ public/
 
 .DS_Store
 publish.zip
+
+node_modules/

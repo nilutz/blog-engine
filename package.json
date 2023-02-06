@@ -1,0 +1,14 @@
+{
+  "name": "blog-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "http://192.168.2.31:10880/nico/blog-engine.git",
+  "author": "Nico Lutz <nico@bakkenbaeck.no>",
+  "license": "MIT",
+  "scripts": {
+    "wrangler": "wrangler pages publish public --project-name notes --branch=main --skip-caching"
+  },
+  "dependencies": {
+    "wrangler": "^2.9.0"
+  }
+}

@@ -1,0 +1,47 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer">
+
+        <meta name="description" content="About Note">
+        <meta name="author" content="Nico Lutz">
+
+        <link rel="stylesheet" href="{{base_url}}/static/css/fonts.css">
+        <link rel="stylesheet" href="{{base_url}}/static/css/custom.css">
+
+        <title>Nico's notes index</title>
+
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="section" id="title">
+                <h2 class="title">About</h2>
+            </div>
+            <div>
+            <p>
+                I have read hunderts of articles, blog posts and papers. My career depends on other people's knowledge.
+                This blog is intended to give something back somehow. Maybe someone will find something interesting here.
+                I am Nico Lutz - a Machine Learning and Fullstack developer at Bakken & Baeck.
+
+            </p>
+            <p>
+                My primary focus here is on:
+                <ul>
+                    <li>Machine Learning / Data Science / Artificial Intelligence</li>
+                    <li>Software Engineering</li>
+                    <li>Python</li>
+                    <li>Rust</li>
+                    <li>MLOps</li>
+                </ul>
+            </p>
+            {{ macros::bottom_menu() }}
+        </div>
+    </body>
+</html>

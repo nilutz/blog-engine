@@ -1,0 +1,16 @@
+{% macro format_date(date) %}
+    {% set date_format = config.extra.date_format | default(value="%a %b %e, %Y") %}
+    {{ date | date(format=date_format) }}
+{% endmacro format_date %}
+
+
+{% macro bottom_menu() %}
+    <div class="section bottom-menu">
+        <hr/>
+        <p>
+            <a href="{{base_url}}/index.html">Home</a>
+            &#183;
+            <a href="{{base_url}}/about.html">About</a>
+        </p>
+    </div>
+{% endmacro bottom_menu %}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>{{ title }}
+      </title>
+        <link>
+            {{ base_url | escape_xml | safe }}
+        </link>
+        <description>{{ description }}</description>
+        <generator>Custom</generator>
+        <language>{{ lang }}</language>
+        <atom:link href="{{ feed_url | safe }}" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>{{ last_updated | date(format="%a, %d %b %Y %H:%M:%S %z") }}</lastBuildDate>
+        {%- for note in notes %}
+        <item>
+            <title>{{ note.title }}</title>
+            <pubDate>{{ note.date | date(format="%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
+            <link>{{base_url}}/notes/{{ note.slug | escape_xml | safe }}</link>
+            <guid>{{base_url}}/notes/{{ note.slug | escape_xml | safe }}</guid>
+            <description>{% if note.description %}{{ note.description }}{% else %}{{ note.content }}{% endif %}</description>
+        </item>
+        {%- endfor %}
+    </channel>
+</rss>

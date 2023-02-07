@@ -31,8 +31,8 @@ fn all_notes(input_path: PathBuf) -> Result<Vec<Note>, NoteError>{
 }
 
 
-static BASE_URL: &str =  "/Users/nico/Dev/blog-engine/public";
-//static BASE_URL: &str = "https://notes.embedded-pepper.dev";
+//static BASE_URL: &str =  "/Users/nico/Dev/blog-engine/public";
+static BASE_URL: &str = "https://notes.embedded-pepper.dev";
 
 
 fn make_index(tera: &Tera, notes: &Vec<Note>){

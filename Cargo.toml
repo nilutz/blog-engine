@@ -1,5 +1,5 @@
 [package]
-name = "blog-engine2"
+name = "blog-engine"
 version = "0.1.0"
 edition = "2021"
 

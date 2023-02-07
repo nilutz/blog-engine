@@ -12,12 +12,12 @@ use crate::highlight;
 
 #[derive(Debug)]
 pub struct NoteError {
-    details: String,
+    _details: String,
 }
 
 impl NoteError {
     pub fn new(msg: &str) -> NoteError {
-        NoteError { details: msg.to_string() }
+        NoteError { _details: msg.to_string() }
     }
 }
 
@@ -56,7 +56,7 @@ impl Note {
             })
         } else {
             Err(NoteError {
-                details: "Did not work".to_string(),
+                _details: "Did not work".to_string(),
             })
         }
     }

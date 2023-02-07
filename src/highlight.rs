@@ -10,7 +10,6 @@ use regex::Captures;
 use self::syntect::parsing::{SyntaxReference, SyntaxSet};
 use self::syntect::highlighting::{Theme, ThemeSet};
 use self::syntect::html::highlighted_html_for_string;
-use self::syntect::dumps::from_binary;
 
 pub fn highlighted_html_for(snippet: &String, lang: Option<String>) -> String {
     match lang {
@@ -22,10 +21,6 @@ pub fn highlighted_html_for(snippet: &String, lang: Option<String>) -> String {
 pub fn highlighted_html_for_language(snippet: &String, attributes: String) -> String {
     lazy_static! {
         static ref SYNTAX_SET: SyntaxSet = SyntaxSet::load_defaults_newlines();
-        // from_binary(include_bytes!("../sublime/syntaxes/newlines.packdump"));
-
-        //SyntaxSet::load_defaults_newlines();
-
         static ref THEME: Theme = ThemeSet::get_theme(theme_path().as_path()).unwrap();
         static ref PYTHON_SYNTAX: &'static SyntaxReference = SYNTAX_SET.find_syntax_by_extension("py").unwrap();
         static ref RUST_SYNTAX: &'static SyntaxReference = SYNTAX_SET.find_syntax_by_extension("rs").unwrap();
@@ -50,9 +45,9 @@ fn theme_path() -> PathBuf {
 
 }
 
-fn syntax_path() -> PathBuf {
-    env::current_dir().unwrap().join("../sublime/syntaxes")
-}
+// fn syntax_path() -> PathBuf {
+//     env::current_dir().unwrap().join("../sublime/syntaxes")
+// }
 
 
 pub fn with_highlighted_code_snippets(html: &String) -> String {
@@ -70,7 +65,6 @@ pub fn with_highlighted_code_snippets(html: &String) -> String {
         let attributes = captures.get(1).map(|m| m.as_str().to_string());
         let snippet = captures.get(2).map_or("", |m| m.as_str()).to_string();
         let mut trimmed_snippet = snippet.trim().to_string();
-        let attribute = attributes.to_owned();
 
         // Manually escaping :(
         trimmed_snippet = trimmed_snippet.replace("&lt;", "<");

@@ -14,7 +14,8 @@ Cargo.lock
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
-public/
+public/*
+!public/static/*
 
 .DS_Store
 publish.zip

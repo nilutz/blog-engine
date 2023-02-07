@@ -31,8 +31,8 @@ fn all_notes(input_path: PathBuf) -> Result<Vec<Note>, NoteError>{
 }
 
 
-//static BASE_URL: &str =  "/Users/nico/Dev/blog-engine2/public";
-static BASE_URL: &str = "https://notes.embedded-pepper.dev";
+static BASE_URL: &str =  "/Users/nico/Dev/blog-engine/public";
+//static BASE_URL: &str = "https://notes.embedded-pepper.dev";
 
 
 fn make_index(tera: &Tera, notes: &Vec<Note>){
@@ -56,12 +56,26 @@ fn make_index(tera: &Tera, notes: &Vec<Note>){
 
     let dir = env::current_dir().unwrap();
     let p = dir.join("./public").join("index").with_extension("html");
-    std::fs::write(p, out).map_err(|_| NoteError::new("Could not make Index"));
+    std::fs::write(p, out).expect("Could not make Index");
 
     println!("Done making Index Page");
 
 }
 
+fn make_archive(tera: &Tera, notes: &Vec<Note>){
+
+    let mut context = Context::new();
+    context.insert("notes", &notes);
+    context.insert("base_url", &BASE_URL);
+
+    let out = tera.render("archive.html", &context).unwrap();
+
+    let dir = env::current_dir().unwrap();
+    let p = dir.join("./public").join("archive").with_extension("html");
+
+    std::fs::write(p, out).expect("Could not make archive");
+    println!("Done making Archive Page");
+}
 fn make_tags(tera: &Tera, taxonomy: &HashMap<String, Vec<&Note>>){
 
 
@@ -75,7 +89,7 @@ fn make_tags(tera: &Tera, taxonomy: &HashMap<String, Vec<&Note>>){
         let out = tera.render("tags.html", &context).unwrap();
         let dir = env::current_dir().unwrap();
         let p = dir.join("./public").join("tags").join(key).with_extension("html");
-        std::fs::write(p, out).map_err(|_| NoteError::new("Could not make taxonomy"));
+        std::fs::write(p, out).expect("Could not make Tags");
 
         println!("Done making Tags Page: {:?}", key.to_string())
     }
@@ -90,7 +104,7 @@ fn make_about(tera: &Tera){
     let out = tera.render("about.html", &context).unwrap();
     let dir = env::current_dir().unwrap();
     let p = dir.join("./public").join("about").with_extension("html");
-    std::fs::write(p, out).map_err(|_| NoteError::new("Could not make taxonomy"));
+    std::fs::write(p, out).expect("Could not make About");
     println!("Done making About Page")
 
 }
@@ -115,7 +129,7 @@ fn make_rss_feed(tera: &Tera, notes: &Vec<Note>) {
     let out = tera.render("rss.html", &context).unwrap();
     let dir = env::current_dir().unwrap();
     let p = dir.join("./public").join("rss").with_extension("xml");
-    std::fs::write(p, out).map_err(|_| NoteError::new("Could not make rss"));
+    std::fs::write(p, out).expect("Could not make RSS");
     println!("Done making Rss Xml")
 }
 
@@ -127,7 +141,7 @@ fn make_sitemap(tera: &Tera, notes: &Vec<Note>) {
     let out = tera.render("sitemap.html", &context).unwrap();
     let dir = env::current_dir().unwrap();
     let p = dir.join("./public").join("sitemap").with_extension("xml");
-    std::fs::write(p, out).map_err(|_| NoteError::new("Could not make Sitemap"));
+    std::fs::write(p, out).expect("Could not make Sitemap");
     println!("Done making Sitemap Page")
 
 }
@@ -163,7 +177,7 @@ fn main() {
 
         let dir = env::current_dir().unwrap();
         let p = dir.join("./public").join("notes").join( &note.slug);
-        std::fs::write(p, out);
+        std::fs::write(p, out).expect("Could not make Page");
 
         if note.frontmatter.contains_key("tags"){
             let tags = &note.frontmatter.get("tags").unwrap();
@@ -184,6 +198,7 @@ fn main() {
     make_about(&tera);
     make_rss_feed(&tera, &notes);
     make_sitemap(&tera, &notes);
+    make_archive(&tera, &notes);
 
 
     // styling

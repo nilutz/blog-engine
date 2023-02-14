@@ -9,7 +9,7 @@ tags:
 
 ## A Blog engine
 
-This is a simple static site generator. The work is based on [Zola](https://www.getzola.org/) and [this](https://patshaughnessy.net/2019/9/4/using-rust-to-build-a-blog-site) blog post by Pat Shaughnessy. I wanted to a blog for a long time and I wanted to learn rust for a long time. So I started learning rust by building this static site generator, which in turn powers this blog. The engine takes markdown files in `/notes` and  [tera](https://tera.netlify.app) templates (localted in `/templates`) then it turns them into plain old html. Simple as that.
+This is a simple static site generator. The work is based on [Zola](https://www.getzola.org/) and [this](https://patshaughnessy.net/2019/9/4/using-rust-to-build-a-blog-site) blog post by Pat Shaughnessy. I wanted to do a blog for a long time and I also wanted to learn rust for a long time. So I started learning rust by building this static site generator, which in turn powers this blog. The engine takes markdown files in `/notes` and  [tera](https://tera.netlify.app) templates (located in `/templates`) then it turns them into plain old html. Simple as that.
 
 The rest of this note shows basic functionality on how the html pages are generated. The heart of the engine is a function that iterates the `/notes` directory and generates a struct containing necessary metadata:
 

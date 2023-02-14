@@ -21,4 +21,8 @@ A more dev friendly experience:
 * mathJax rendering
 * more syntax highlighting
 
+* include json from miniflux...
+
+* update rss, link to rss feed
+
 * bug fix >< symbols
